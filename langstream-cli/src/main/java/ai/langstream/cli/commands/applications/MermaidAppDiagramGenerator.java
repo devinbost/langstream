@@ -350,7 +350,12 @@ public class MermaidAppDiagramGenerator {
                                                             || r.getOriginalType()
                                                                     .equals("bedrock-configuration")
                                                             || r.getOriginalType()
-                                                                    .equals("ollama-configuration"))
+                                                                    .equals("ollama-configuration")
+                                                            || r.getOriginalType()
+                                                                    .equals("rayllm-configuration")
+                                                            || r.getOriginalType()
+                                                                    .equals(
+                                                                            "rayserve-configuration"))
                                     .findFirst()
                                     .orElse(null);
                     if (resource != null) {

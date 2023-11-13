@@ -56,6 +56,8 @@ public class GenAIToolKitFunctionAgentProvider extends AbstractAgentProvider {
     protected static final String SERVICE_OPEN_AI = "open-ai-configuration";
     protected static final String SERVICE_BEDROCK = "bedrock-configuration";
     protected static final String SERVICE_OLLAMA = "ollama-configuration";
+    protected static final String SERVICE_RAYLLM = "rayllm-configuration";
+    protected static final String SERVICE_RAYSERVE = "rayserve-configuration";
 
     protected static final List<String> AI_SERVICES =
             List.of(
@@ -63,8 +65,10 @@ public class GenAIToolKitFunctionAgentProvider extends AbstractAgentProvider {
                     SERVICE_HUGGING_FACE,
                     SERVICE_OPEN_AI,
                     SERVICE_BEDROCK,
-                    SERVICE_OLLAMA);
-
+                    SERVICE_OLLAMA,
+                    SERVICE_RAYLLM,
+                    SERVICE_RAYSERVE);
+,
     static {
         final Map<String, StepConfigurationInitializer> steps = new HashMap<>();
         steps.put("drop-fields", DropFieldsConfiguration.STEP);
@@ -247,6 +251,8 @@ public class GenAIToolKitFunctionAgentProvider extends AbstractAgentProvider {
             case SERVICE_OPEN_AI -> "openai";
             case SERVICE_BEDROCK -> "bedrock";
             case SERVICE_OLLAMA -> "ollama";
+            case SERVICE_RAYLLM -> "rayllm";
+            case SERVICE_RAYSERVE -> "rayserve";
             default -> null;
         };
     }
