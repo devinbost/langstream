@@ -68,7 +68,6 @@ public class GenAIToolKitFunctionAgentProvider extends AbstractAgentProvider {
                     SERVICE_OLLAMA,
                     SERVICE_RAYLLM,
                     SERVICE_RAYSERVE);
-,
     static {
         final Map<String, StepConfigurationInitializer> steps = new HashMap<>();
         steps.put("drop-fields", DropFieldsConfiguration.STEP);
