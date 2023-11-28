@@ -38,13 +38,18 @@ public class AIProvidersResourceProvider extends AbstractResourceProvider {
     protected static final String BEDROCK_CONFIGURATION = "bedrock-configuration";
 
     protected static final String OLLAMA_CONFIGURATION = "ollama-configuration";
+
+    protected static final String RAYLLM_CONFIGURATION = "rayllm-configuration";
+    protected static final String RAYSERVE_CONFIGURATION = "rayserve-configuration";
     private static final Set<String> SUPPORTED_TYPES =
             Set.of(
                     OPEN_AI_CONFIGURATION,
                     HUGGING_FACE_CONFIGURATION,
                     VERTEX_CONFIGURATION,
                     BEDROCK_CONFIGURATION,
-                    OLLAMA_CONFIGURATION);
+                    OLLAMA_CONFIGURATION,
+                    RAYLLM_CONFIGURATION,
+                    RAYSERVE_CONFIGURATION);
     protected static final ObjectMapper MAPPER = new ObjectMapper();
 
     public AIProvidersResourceProvider() {
@@ -112,6 +117,12 @@ public class AIProvidersResourceProvider extends AbstractResourceProvider {
             }
             case OLLAMA_CONFIGURATION -> {
                 return OllamaConfig.class;
+            }
+            case RAYLLM_CONFIGURATION -> {
+                return RayLLMConfig.class;
+            }
+            case RAYSERVE_CONFIGURATION -> {
+                return RayServeConfig.class;
             }
             default -> throw new IllegalStateException();
         }
@@ -290,5 +301,58 @@ public class AIProvidersResourceProvider extends AbstractResourceProvider {
                         """)
         @JsonProperty("endpoint-override")
         private String endpointOverride;
+    }
+    @Data
+    @ResourceConfig(name = "Ray LLM", description = "Connect to Ray LLM API.")
+    public static class RayLLMConfig {
+
+        @ConfigProperty(
+                description =
+                        """
+                        RayLLM access key.
+                        """,
+                required = true)
+        @JsonProperty("access-key")
+        private String accessKey;
+
+        @ConfigProperty(
+                description =
+                        """
+                        Base URL for Ray LLM endpoint
+                        """,
+                required = true)
+        @JsonProperty("url")
+        private String url;
+
+        @ConfigProperty(
+                description =
+                        """
+                        Model for Ray LLM.
+                        """)
+        @JsonProperty("model")
+        private String model;
+    }
+    @Data
+    @ResourceConfig(name = "Ray Serve", description = "Connect to Ray Serve endpoint.")
+    public static class RayServeConfig {
+
+        @ConfigProperty(
+                description =
+                        """
+                        Ray Serve access key.
+                        """,
+                required = true)
+        @JsonProperty("access-key")
+        private String accessKey;
+
+        @ConfigProperty(
+                description =
+                        """
+                        Base URL for Ray Serve endpoint
+                        """,
+                required = true)
+        @JsonProperty("url")
+        private String url;
+
     }
 }

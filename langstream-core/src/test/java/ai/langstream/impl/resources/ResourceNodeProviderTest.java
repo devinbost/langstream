@@ -183,7 +183,26 @@ class ResourceNodeProviderTest {
                         Map.of(
                                 "region", "us-west-2",
                                 "access-key", "xx",
-                                "secret-key", "yy")));
+                                "secret-key", "yy")),
+                Arguments.of(NON_VALID, "rayllm-configuration", Map.of()),
+                Arguments.of(
+                        VALID,
+                        "rayllm-configuration",
+                        Map.of(
+                                "url", "xx",
+                                "access-key", "xx",
+                                "model", "yy")),
+                Arguments.of(NON_VALID, "rayserve-configuration", Map.of()),
+                Arguments.of(
+                        VALID,
+                        "rayserve-configuration",
+                        Map.of(
+                                "url", "xx",
+                                "access-key", "xx")
+                )
+
+
+        );
     }
 
     @ParameterizedTest
